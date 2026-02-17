@@ -4,7 +4,7 @@ export type Job = {
 };
 
 export type JobApplication = {
-  userid: string;
+  uuid: string;
   jobId: string;
   candidateId: string;
   repoUrl: string;
