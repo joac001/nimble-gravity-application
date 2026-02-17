@@ -1,25 +1,48 @@
 import { JobCard } from './components';
-import type { Job } from './types/job';
+import { Loader2 } from 'lucide-react';
+import { useUserData, useJobsData } from './hooks';
 
 export default function App() {
-  const jobs: Job[] = [
-    { id: '1', title: 'Software Engineer' },
-    { id: '2', title: 'Data Scientist' },
-    { id: '3', title: 'Product Manager' },
-    { id: '4', title: 'UX Designer' },
-    { id: '5', title: 'DevOps Engineer' },
-    { id: '6', title: 'Backend Developer' },
-    { id: '7', title: 'Frontend Developer' },
-    { id: '8', title: 'QA Engineer' },
-  ];
+  const { userData, isLoadingUser, isErrorUser, errorUser } = useUserData();
+  const { jobs, isLoadingJobs, isErrorJobs, errorJobs } = useJobsData();
+
+  const onError = () => {
+    if (isErrorUser) {
+      return (
+        <div className="text-error text-center bg-error/10 p-4 rounded-lg">
+          Error loading user data:{' '}
+          {errorUser instanceof Error ? errorUser.message : 'Unknown error'}
+        </div>
+      );
+    }
+
+    if (isErrorJobs) {
+      return (
+        <div className="text-error text-center bg-error/10 p-4 rounded-lg">
+          Error loading jobs data:{' '}
+          {errorJobs instanceof Error ? errorJobs.message : 'Unknown error'}
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   return (
-    <main className="lg:px-8 items-start justify-center bg-background text-primary w-screen min-h-dvh py-8 px-4 antialiased">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {jobs.map(job => (
-          <JobCard key={job.id} job={job}></JobCard>
-        ))}
-      </div>
+    <main className="flex lg:px-8 items-center justify-center bg-background text-primary w-screen min-h-dvh py-8 px-4 antialiased">
+      {isErrorUser || isErrorJobs ? (
+        onError()
+      ) : isLoadingJobs || isLoadingUser ? (
+        <div className="flex items-center justify-center">
+          <Loader2 className="size-10 animate-spin" />
+        </div>
+      ) : (
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {jobs?.map(job => (
+            <JobCard key={job.id} job={job} user={userData} />
+          ))}
+        </section>
+      )}
     </main>
   );
 }
