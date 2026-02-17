@@ -1,4 +1,4 @@
-Esta es mini aplicacion es parte de mi postulacion para el puesto como Jr. Full-stack developer en Nimble Gravity.
+Esta mini aplicacion es parte de mi postulacion para el puesto como Jr. Full-stack developer en Nimble Gravity.
 
 Para usar la aplicacion:
 
