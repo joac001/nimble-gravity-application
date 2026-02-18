@@ -29,6 +29,7 @@ export default function JobCard({ job, user }: JobCardProps) {
     mutate({
       uuid: user.uuid,
       jobId: job.id,
+      applicationId: user.applicationId,
       candidateId: user.candidateId,
       repoUrl: url.trim(),
     });

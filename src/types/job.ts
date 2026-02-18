@@ -6,6 +6,7 @@ export type Job = {
 export type JobApplication = {
   uuid: string;
   jobId: string;
+  applicationId: string;
   candidateId: string;
   repoUrl: string;
 };
