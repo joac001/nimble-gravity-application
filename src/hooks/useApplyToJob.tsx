@@ -9,7 +9,7 @@ interface UseApplyToJobOptions {
 export default function useApplyToJob(options?: UseApplyToJobOptions) {
   return useMutation({
     mutationFn: (params: JobApplication) =>
-      apiRequest<void>({ method: 'post', url: '/api/jobs/apply', data: params }),
+      apiRequest<void>({ method: 'post', url: '/api/candidate/apply-to-job', data: params }),
     onError: options?.onError,
   });
 }
